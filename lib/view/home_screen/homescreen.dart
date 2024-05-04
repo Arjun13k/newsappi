@@ -29,34 +29,55 @@ class _HomeScreenState extends State<HomeScreen> {
     return DefaultTabController(
       length: providerObj.category.length,
       child: Scaffold(
+          drawer: Drawer(
+              // child: Column(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   crossAxisAlignment: CrossAxisAlignment.center,
+              //   children: [
+              //     DropdownButton(
+              //       value: selectedDropdown,
+              //       hint: Text("LANGUAGE"),
+              //       items: List.generate(
+              //           providerObj.language.length,
+              //           (index) => DropdownMenuItem(
+              //                 child: Text(providerObj.languageIndex[index]),
+              //                 value: providerObj.languageIndex[index],
+              //                 onTap: () {
+              //                   providerObj
+              //                       .getLanguageData(providerObj.language[index]);
+
+              //                 },
+              //               )),
+              //       onChanged: (value) {
+              //         selectedDropdown = value;
+              //         setState(() {});
+              //       },
+              //     ),
+              //   ],
+              // ),
+              ),
           appBar: AppBar(
-            leading: DrawerButton(),
             centerTitle: true,
             title: Text("WORLD NEWS",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
             actions: [
-              DropdownButton(
-                value: selectedDropdown,
-                hint: Text("INT"),
-                items: List.generate(
-                    providerObj.country.length,
-                    (index) => DropdownMenuItem(
-                          child: Text(providerObj.country[index]),
-                          value: providerObj.country[index],
-                          onTap: () {
-                            providerObj.getCOuntry(providerObj.country[index]);
-                          },
-                        )),
-                onChanged: (value) {
-                  selectedDropdown = value;
-                  setState(() {});
-                },
-              ),
+              //
               IconButton(
-                  onPressed: () {},
-                  icon: IconButton(onPressed: () {}, icon: Icon(Icons.search)))
+                  onPressed: () {
+                    // TextField(
+                    //   decoration: InputDecoration(hintText: "ss"),
+                    // );
+                  },
+                  icon: Icon(Icons.search))
             ],
             bottom: TabBar(
+                unselectedLabelColor: Colors.black,
+                labelColor: Colors.white,
+                indicator: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(40)),
+                indicatorSize: TabBarIndicatorSize.tab,
                 onTap: (value) {
                   providerObj.getCategory(value);
                 },
@@ -64,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 tabs: List.generate(
                     providerObj.category.length,
                     (index) => Tab(
-                          text: providerObj.category[index].toUpperCase(),
+                          text: "${providerObj.category[index].toUpperCase()}",
                         ))),
           ),
           body: providerObj.isLoading
